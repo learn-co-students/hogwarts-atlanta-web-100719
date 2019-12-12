@@ -9,6 +9,12 @@ const Nav = () => {
 				<img src={piggy} className="App-logo" alt="piggy" />
 			</div>
 			<span className="normalText">A React App for County Fair Hog Fans</span>
+
+			<div >
+				<button> Sort By Name</button>
+				<button> Sort By Weight</button>
+				<button>Greased only</button>
+			</div>
 		</div>
 	)
 }
