@@ -7,8 +7,7 @@ class HogCardContainer extends React.Component {
             {this.props.hogList.map(hog => {
                 return <HogCard key={hog.name} hog={hog} />
             })}
-
-        </div >)
+        </div>)
     }
 }
 

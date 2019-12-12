@@ -6,14 +6,61 @@ import HogCardContainer from '../containers/HogCardContainer';
 
 class App extends Component {
 
-  // state = { hogsList: hogs }
+  state = {
+    hogsList: hogs,
+    greasedOnly: false
+  }
 
+  compareNames = (a, b) => {
+    const hogA = a.name.toUpperCase();
+    const hogB = b.name.toUpperCase();
+
+    let comparison = 0;
+    if (hogA > hogB) {
+      comparison = 1;
+    } else if (hogA < hogB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+  handleNameClick = () => {
+    this.setState({ hogsList: this.getHogs().sort(this.compareNames) })
+  }
+
+  handleWeightClick = () => {
+    this.setState({
+      hogsList: this.getHogs().sort((a, b) => {
+        return a.weight - b.weight
+      })
+    })
+  }
+
+  getHogs = () => {
+    return this.state.greasedOnly ? this.filteredHogs() : hogs
+  }
+
+  filteredHogs = () => {
+    return hogs.filter(hog => {
+      return hog.greased === true
+    })
+  }
+
+  handleGreasedClick = () => {
+    this.setState((previousState) => {
+      return {
+        hogsList: previousState.greasedOnly ? hogs : this.filteredHogs(),
+        greasedOnly: !previousState.greasedOnly
+      }
+    }
+    )
+  }
 
   render() {
     return (
       <div className="App">
-        < Nav />
-        <HogCardContainer hogList={hogs} />
+        <Nav handleNameClick={this.handleNameClick} handleWeightClick={this.handleWeightClick} handleGreasedClick={this.handleGreasedClick} greasedOnly={this.state.greasedOnly} />
+        <HogCardContainer hogList={this.state.hogsList} />
       </div>
     )
   }
