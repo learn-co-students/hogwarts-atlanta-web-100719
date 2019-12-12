@@ -30,30 +30,19 @@ class App extends Component {
 
   handleWeightClick = () => {
     this.setState({
-      hogsList: this.getHogs().sort((a, b) => {
-        return a.weight - b.weight
-      })
+      hogsList: this.getHogs().sort((a, b) => a.weight - b.weight)
     })
   }
 
-  getHogs = () => {
-    return this.state.greasedOnly ? this.filteredHogs() : hogs
-  }
+  getHogs = () => this.state.greasedOnly ? this.filteredHogs() : hogs
 
-  filteredHogs = () => {
-    return hogs.filter(hog => {
-      return hog.greased === true
-    })
-  }
+  filteredHogs = () => hogs.filter(hog => hog.greased === true)
 
   handleGreasedClick = () => {
-    this.setState((previousState) => {
-      return {
-        hogsList: previousState.greasedOnly ? hogs : this.filteredHogs(),
-        greasedOnly: !previousState.greasedOnly
-      }
-    }
-    )
+    this.setState((previousState) => ({
+      hogsList: previousState.greasedOnly ? hogs : this.filteredHogs(),
+      greasedOnly: !previousState.greasedOnly
+    }))
   }
 
   render() {

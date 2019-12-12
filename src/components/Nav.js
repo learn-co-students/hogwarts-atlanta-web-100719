@@ -1,19 +1,22 @@
 import piggy from '../porco.png'
 import React from 'react'
+import { Button, Divider, Icon } from 'semantic-ui-react'
 
 const Nav = (props) => {
 	return (
 		<div className="navWrapper">
-			<span className="headerText">Hogwarts</span>
-			<div className="TwirlyPig">
-				<img src={piggy} className="App-logo" alt="piggy" />
+			<div className="content">
+				<span className="headerText">Hogwarts</span>
+				<div className="TwirlyPig">
+					<img src={piggy} className="App-logo" alt="piggy" />
+				</div>
+				<span className="normalText">A React App for County Fair Hog Fans</span>
 			</div>
-			<span className="normalText">A React App for County Fair Hog Fans</span>
-
-			<div >
-				<button onClick={props.handleNameClick}> Sort By Name</button>
-				<button onClick={props.handleWeightClick}> Sort By Weight</button>
-				<button onClick={props.handleGreasedClick}>Greased Only {props.greasedOnly ? <i className="toggle on icon"></i> : <i className="toggle off icon"></i>}</button>
+			<Divider />
+			<div>
+				<Button onClick={props.handleNameClick}> Sort By Name</Button>
+				<Button onClick={props.handleWeightClick}> Sort By Weight</Button>
+				<Button icon labelPosition='right' onClick={props.handleGreasedClick}>Greased Only {props.greasedOnly ? <Icon className="toggle on icon"></Icon> : <Icon className="toggle off icon"></Icon>}</Button>
 			</div>
 		</div>
 	)

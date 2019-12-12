@@ -1,14 +1,15 @@
 import React from 'react'
 import HogCard from '../components/HogCard'
+import { Card } from 'semantic-ui-react'
 
-class HogCardContainer extends React.Component {
-    render() {
-        return (<div className="ui grid container">
-            {this.props.hogList.map(hog => {
-                return <HogCard key={hog.name} hog={hog} />
-            })}
-        </div>)
-    }
+const HogCardContainer = (props) => {
+    return (
+        <Card.Group centered stackable>
+            {
+                props.hogList.map(hog => <HogCard key={hog.name} hog={hog} />)
+            }
+        </Card.Group >
+    )
 }
 
 export default HogCardContainer
