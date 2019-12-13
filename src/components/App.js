@@ -7,8 +7,9 @@ import HogCardContainer from '../containers/HogCardContainer';
 class App extends Component {
 
   state = {
-    hogsList: hogs,
-    greasedOnly: false
+    greasedOnly: false,
+    sortedByName: false,
+    sortedByWeight: false
   }
 
   compareNames = (a, b) => {
@@ -25,31 +26,43 @@ class App extends Component {
   }
 
   handleNameClick = () => {
-    this.setState({ hogsList: this.getHogs().sort(this.compareNames) })
+    this.setState({
+      sortedByWeight: false,
+      sortedByName: !this.state.sortedByName
+    })
   }
 
   handleWeightClick = () => {
     this.setState({
-      hogsList: this.getHogs().sort((a, b) => a.weight - b.weight)
+      sortedByName: false,
+      sortedByWeight: !this.state.sortedByWeight
     })
   }
 
-  getHogs = () => this.state.greasedOnly ? this.filteredHogs() : hogs
-
-  filteredHogs = () => hogs.filter(hog => hog.greased === true)
-
   handleGreasedClick = () => {
     this.setState((previousState) => ({
-      hogsList: previousState.greasedOnly ? hogs : this.filteredHogs(),
+      // hogsList: previousState.greasedOnly ? hogs : this.filteredHogs(),
       greasedOnly: !previousState.greasedOnly
     }))
   }
 
+  getHogs = () => {
+    let filtered = this.state.greasedOnly ? this.filteredHogs() : [...hogs]
+    if (this.state.sortedByName)
+      return filtered.sort(this.compareNames)
+    else if (this.state.sortedByWeight)
+      return filtered.sort((a, b) => a.weight - b.weight)
+    else
+      return filtered
+  }
+
+  filteredHogs = () => hogs.filter(hog => hog.greased === true)
+
   render() {
     return (
       <div className="App">
-        <Nav handleNameClick={this.handleNameClick} handleWeightClick={this.handleWeightClick} handleGreasedClick={this.handleGreasedClick} greasedOnly={this.state.greasedOnly} />
-        <HogCardContainer hogList={this.state.hogsList} />
+        <Nav handleNameClick={this.handleNameClick} handleWeightClick={this.handleWeightClick} handleGreasedClick={this.handleGreasedClick} greasedOnly={this.state.greasedOnly} sortedByName={this.state.sortedByName} sortedByWeight={this.state.sortedByWeight} />
+        <HogCardContainer hogList={this.getHogs()} />
       </div>
     )
   }

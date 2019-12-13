@@ -14,9 +14,9 @@ const Nav = (props) => {
 			</div>
 			<Divider />
 			<div>
-				<Button onClick={props.handleNameClick}> Sort By Name</Button>
-				<Button onClick={props.handleWeightClick}> Sort By Weight</Button>
-				<Button icon labelPosition='right' onClick={props.handleGreasedClick}>Greased Only {props.greasedOnly ? <Icon className="toggle on icon"></Icon> : <Icon className="toggle off icon"></Icon>}</Button>
+				<Button icon labelPosition='right' onClick={props.handleNameClick}> Sort By Name {props.sortedByName ? <Icon className="toggle on "></Icon> : <Icon className="toggle off"></Icon>}</Button>
+				<Button icon labelPosition='right' onClick={props.handleWeightClick}> Sort By Weight {props.sortedByWeight ? <Icon className="toggle on"></Icon> : <Icon className="toggle off"></Icon>}</Button>
+				<Button icon labelPosition='right' onClick={props.handleGreasedClick}>Greased Only {props.greasedOnly ? <Icon className="toggle on"></Icon> : <Icon className="toggle off"></Icon>}</Button>
 			</div>
 		</div>
 	)
