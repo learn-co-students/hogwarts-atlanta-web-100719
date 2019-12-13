@@ -18,6 +18,7 @@ class HogCard extends React.Component {
         return (
             <Card onClick={this.handleClick}>
                 <Card.Content extra textAlign='center'>
+                    <Image fluid size='small' src={require(`../hog-imgs/${this.slug(hog.name)}.jpg`)} alt={hog.name} />
                     <Card.Description>Specialty:{hog.specialty}</Card.Description>
                     <Card.Description>Greased?:{hog.greased ? "Yes" : "No"}</Card.Description>
                     <Card.Description><Icon className="balance scale icon"></Icon>{hog.weight} lbs</Card.Description>
